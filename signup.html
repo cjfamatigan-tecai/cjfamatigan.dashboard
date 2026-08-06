@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create account — Aurora Retail</title>
+<meta name="description" content="Create your Aurora Retail account.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true">
+  <div class="aurora__blob aurora__blob--1"></div>
+  <div class="aurora__blob aurora__blob--2"></div>
+  <div class="aurora__blob aurora__blob--3"></div>
+</div>
+
+<main class="auth-shell">
+  <div class="auth-card">
+    <div class="brand-mark">
+      <div class="brand-mark__logo">AR</div>
+      <div>
+        <div class="brand-mark__name">Aurora Retail</div>
+        <div class="brand-mark__tagline">Store dashboard</div>
+      </div>
+    </div>
+
+    <h1>Create your account</h1>
+    <p class="subtitle">Track orders, loyalty points, and your account details in one place.</p>
+
+    <div id="signup-alert"></div>
+
+    <form id="signup-form" novalidate>
+      <div class="field">
+        <label for="signup-name">Full name</label>
+        <input id="signup-name" name="name" type="text" autocomplete="name" required placeholder="Jane Rivera">
+      </div>
+
+      <div class="field">
+        <label for="signup-email">Email address</label>
+        <input id="signup-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+      </div>
+
+      <div class="field">
+        <label for="signup-password">Password</label>
+        <input id="signup-password" name="password" type="password" autocomplete="new-password" required placeholder="At least 8 characters">
+        <button type="button" class="password-toggle" data-target="signup-password">Show</button>
+        <div class="field-hint">Use 8+ characters. Avoid reusing a password from another site.</div>
+      </div>
+
+      <div class="field">
+        <label for="signup-confirm">Confirm password</label>
+        <input id="signup-confirm" name="confirm" type="password" autocomplete="new-password" required placeholder="Re-enter your password">
+        <button type="button" class="password-toggle" data-target="signup-confirm">Show</button>
+      </div>
+
+      <button id="signup-submit" class="btn btn-primary" type="submit">Create account</button>
+    </form>
+
+    <p class="auth-footer">
+      Already have an account? <a class="link" href="index.html">Sign in</a>
+    </p>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

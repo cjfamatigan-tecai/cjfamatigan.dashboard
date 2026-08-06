@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support console — Aurora Retail</title>
+<meta name="description" content="Look up customer accounts and orders to help resolve support requests.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true">
+  <div class="aurora__blob aurora__blob--1"></div>
+  <div class="aurora__blob aurora__blob--2"></div>
+  <div class="aurora__blob aurora__blob--3"></div>
+</div>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-mark__logo">AR</div>
+      <div>
+        <div class="brand-mark__name">Aurora Retail</div>
+        <div class="brand-mark__tagline">Support console</div>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <a class="sidebar__link active" href="#overview">Overview</a>
+      <a class="sidebar__link" href="#customers">Customer lookup</a>
+      <a class="sidebar__link" id="admin-link" href="admin.html" style="display:none;">Admin console</a>
+      <a class="sidebar__link" href="dashboard.html">My account</a>
+    </nav>
+
+    <div class="sidebar__footer">
+      <button class="btn btn-ghost" id="signout-btn" type="button">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>Support console</h1>
+        <div class="subtitle">Look up any customer's account and orders to help with a support request.</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span class="badge badge-support" id="role-badge">Support</span>
+        <div class="avatar" id="avatar-initials">··</div>
+      </div>
+    </div>
+
+    <section id="overview" class="grid grid-stats">
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Customers</div>
+        <div class="stat-tile__value" id="stat-customers">—</div>
+      </div>
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Total orders</div>
+        <div class="stat-tile__value" id="stat-orders">—</div>
+      </div>
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Pending orders</div>
+        <div class="stat-tile__value" id="stat-pending">—</div>
+      </div>
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Cancelled orders</div>
+        <div class="stat-tile__value" id="stat-cancelled">—</div>
+      </div>
+    </section>
+
+    <section id="customers" class="card fade-in">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div>
+          <h2>Customer lookup</h2>
+          <div class="card-sub">Read-only — support accounts can view every customer's contact details and order history, but can't change roles or store settings.</div>
+        </div>
+        <input id="customer-search" type="search" placeholder="Search name or email…" style="padding:9px 12px; border-radius:10px; border:1px solid var(--border); background:var(--surface-2); color:var(--text-primary); font:inherit; min-width:220px;">
+      </div>
+      <div class="table-scroll" style="margin-top:16px;">
+        <table class="data-table" id="customers-table">
+          <thead>
+            <tr><th></th><th>Customer</th><th>Email</th><th>Phone</th><th>Role</th><th>Orders</th><th>Loyalty pts</th><th>Joined</th></tr>
+          </thead>
+          <tbody id="customers-body">
+            <tr><td colspan="8"><div class="skeleton" style="height:18px;"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="customers-empty" class="empty-state" style="display:none;">No matching customers.</div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/support.js"></script>
+</body>
+</html>

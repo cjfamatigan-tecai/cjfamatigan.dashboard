@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin console — Aurora Retail</title>
+<meta name="description" content="Store-wide sales, inventory, customer data, and role management — visible only to admin accounts.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true">
+  <div class="aurora__blob aurora__blob--1"></div>
+  <div class="aurora__blob aurora__blob--2"></div>
+  <div class="aurora__blob aurora__blob--3"></div>
+</div>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-mark__logo">AR</div>
+      <div>
+        <div class="brand-mark__name">Aurora Retail</div>
+        <div class="brand-mark__tagline">Admin console</div>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <a class="sidebar__link active" href="#overview">Overview</a>
+      <a class="sidebar__link" href="#inventory">Inventory</a>
+      <a class="sidebar__link" href="#customers">Customers</a>
+      <a class="sidebar__link" href="support.html">Support console</a>
+      <a class="sidebar__link" href="dashboard.html">My account</a>
+    </nav>
+
+    <div class="sidebar__footer">
+      <button class="btn btn-ghost" id="signout-btn" type="button">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>Admin console</h1>
+        <div class="subtitle">Store-wide data and role management — visible only to admin accounts.</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span class="badge badge-admin">Admin</span>
+        <div class="avatar" id="avatar-initials">··</div>
+      </div>
+    </div>
+
+    <section id="overview" class="grid grid-stats">
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Total revenue</div>
+        <div class="stat-tile__value" id="stat-revenue">—</div>
+      </div>
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Orders</div>
+        <div class="stat-tile__value" id="stat-orders">—</div>
+      </div>
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Customers</div>
+        <div class="stat-tile__value" id="stat-customers">—</div>
+      </div>
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Avg order value</div>
+        <div class="stat-tile__value" id="stat-aov">—</div>
+      </div>
+    </section>
+
+    <section class="grid grid-2" style="margin-bottom:24px;">
+      <div class="card fade-in">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <div>
+            <h2>Revenue, last 14 days</h2>
+            <div class="card-sub">Sum of order totals across all customers.</div>
+          </div>
+          <button class="link" id="revenue-table-toggle" type="button">View as table</button>
+        </div>
+        <div id="revenue-chart" style="margin-top:8px;"></div>
+        <div class="table-scroll" id="revenue-table-wrap" style="display:none; margin-top:12px;">
+          <table class="data-table" id="revenue-table">
+            <thead><tr><th>Date</th><th>Revenue</th></tr></thead>
+            <tbody id="revenue-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <h2>Orders by status</h2>
+        <div class="card-sub">Share of all orders.</div>
+        <div id="status-breakdown"></div>
+      </div>
+    </section>
+
+    <section id="inventory" class="card fade-in" style="margin-bottom:24px;">
+      <h2>Inventory levels</h2>
+      <div class="card-sub">Stock on hand per product.</div>
+      <div id="inventory-chart"></div>
+      <div style="display:flex; gap:18px; margin-top:14px; font-size:0.8rem; color:var(--text-secondary); flex-wrap:wrap;">
+        <span><span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:var(--status-good); margin-right:6px;"></span>In stock</span>
+        <span><span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:var(--status-warning); margin-right:6px;"></span>Low stock (&lt;20)</span>
+        <span><span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:var(--status-critical); margin-right:6px;"></span>Out of stock</span>
+      </div>
+    </section>
+
+    <section id="customers" class="card fade-in">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div>
+          <h2>Customer accounts</h2>
+          <div class="card-sub">Confidential — this list is only reachable by admin accounts (enforced by database policy, not just page hiding). Change a person's role directly from the Role column.</div>
+        </div>
+        <input id="customer-search" type="search" placeholder="Search name or email…" style="padding:9px 12px; border-radius:10px; border:1px solid var(--border); background:var(--surface-2); color:var(--text-primary); font:inherit; min-width:220px;">
+      </div>
+      <div class="table-scroll" style="margin-top:16px;">
+        <table class="data-table" id="customers-table">
+          <thead>
+            <tr><th>Customer</th><th>Email</th><th>Role</th><th>Orders</th><th>Total spent</th><th>Loyalty pts</th><th>Joined</th><th></th></tr>
+          </thead>
+          <tbody id="customers-body">
+            <tr><td colspan="8"><div class="skeleton" style="height:18px;"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="customers-empty" class="empty-state" style="display:none;">No matching customers.</div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

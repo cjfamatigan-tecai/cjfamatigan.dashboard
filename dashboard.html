@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My account — Aurora Retail</title>
+<meta name="description" content="Your Aurora Retail account, orders, and loyalty points.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true">
+  <div class="aurora__blob aurora__blob--1"></div>
+  <div class="aurora__blob aurora__blob--2"></div>
+  <div class="aurora__blob aurora__blob--3"></div>
+</div>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-mark__logo">AR</div>
+      <div>
+        <div class="brand-mark__name">Aurora Retail</div>
+        <div class="brand-mark__tagline">My account</div>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <a class="sidebar__link active" href="#overview">Overview</a>
+      <a class="sidebar__link" href="#orders">My orders</a>
+      <a class="sidebar__link" href="#catalog">Catalog</a>
+      <a class="sidebar__link" href="#account">Account settings</a>
+      <a class="sidebar__link" id="support-link" href="support.html" style="display:none;">Support console</a>
+      <a class="sidebar__link" id="admin-link" href="admin.html" style="display:none;">Admin console</a>
+    </nav>
+
+    <div class="sidebar__footer">
+      <button class="btn btn-ghost" id="signout-btn" type="button">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="welcome-heading">Welcome back</h1>
+        <div class="subtitle">Here's what's happening with your account.</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span class="badge badge-customer" id="role-badge">Customer</span>
+        <div class="avatar" id="avatar-initials">··</div>
+      </div>
+    </div>
+
+    <section id="overview" class="grid grid-stats">
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Loyalty points</div>
+        <div class="stat-tile__value" id="stat-points">—</div>
+      </div>
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Total orders</div>
+        <div class="stat-tile__value" id="stat-orders">—</div>
+      </div>
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Total spent</div>
+        <div class="stat-tile__value" id="stat-spent">—</div>
+      </div>
+      <div class="card stat-tile">
+        <div class="stat-tile__label">Member since</div>
+        <div class="stat-tile__value" id="stat-since" style="font-size:1.2rem;">—</div>
+      </div>
+    </section>
+
+    <section id="orders" class="card fade-in" style="margin-bottom:24px;">
+      <h2>My orders</h2>
+      <div class="card-sub">Only you (and the store owner) can see this list — it's private to your account.</div>
+      <div class="table-scroll">
+        <table class="data-table" id="orders-table">
+          <thead>
+            <tr><th>Order</th><th>Status</th><th>Date</th><th>Total</th></tr>
+          </thead>
+          <tbody id="orders-body">
+            <tr><td colspan="4"><div class="skeleton" style="height:18px;"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="orders-empty" class="empty-state" style="display:none;">
+        No orders yet. Once you check out in-store or online, they'll show up here.
+      </div>
+    </section>
+
+    <section id="catalog" class="card fade-in" style="margin-bottom:24px;">
+      <h2>Catalog</h2>
+      <div class="card-sub">What's currently in stock.</div>
+      <div class="grid" id="catalog-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+        <div class="skeleton" style="height:90px;"></div>
+        <div class="skeleton" style="height:90px;"></div>
+        <div class="skeleton" style="height:90px;"></div>
+      </div>
+    </section>
+
+    <section id="account" class="card fade-in">
+      <h2>Account settings</h2>
+      <div class="card-sub">Your details are confidential — visible only to you and the store owner.</div>
+      <div id="account-alert"></div>
+      <form id="account-form" novalidate>
+        <div class="field">
+          <label for="account-name">Full name</label>
+          <input id="account-name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="account-phone">Phone</label>
+          <input id="account-phone" type="tel" placeholder="Optional">
+        </div>
+        <div class="field">
+          <label for="account-email">Email address</label>
+          <input id="account-email" type="email" disabled>
+          <div class="field-hint">Contact support to change your login email.</div>
+        </div>
+        <button id="account-submit" class="btn btn-primary" type="submit" style="width:auto; padding-left:28px; padding-right:28px;">Save changes</button>
+      </form>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

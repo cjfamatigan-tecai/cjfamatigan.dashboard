@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — Aurora Retail</title>
+<meta name="description" content="Sign in to your Aurora Retail account.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true">
+  <div class="aurora__blob aurora__blob--1"></div>
+  <div class="aurora__blob aurora__blob--2"></div>
+  <div class="aurora__blob aurora__blob--3"></div>
+</div>
+
+<main class="auth-shell">
+  <div class="auth-card">
+    <div class="brand-mark">
+      <div class="brand-mark__logo">AR</div>
+      <div>
+        <div class="brand-mark__name">Aurora Retail</div>
+        <div class="brand-mark__tagline">Store dashboard</div>
+      </div>
+    </div>
+
+    <h1>Welcome back</h1>
+    <p class="subtitle">Sign in to view your account and order history.</p>
+
+    <div id="login-alert"></div>
+
+    <form id="login-form" novalidate>
+      <div class="field">
+        <label for="login-email">Email address</label>
+        <input id="login-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+      </div>
+
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••">
+        <button type="button" class="password-toggle" data-target="login-password">Show</button>
+      </div>
+
+      <div class="field-row-between">
+        <span></span>
+        <a class="link" href="forgot-password.html">Forgot password?</a>
+      </div>
+
+      <button id="login-submit" class="btn btn-primary" type="submit">Sign in</button>
+      <div id="login-resend" style="margin-top:14px; text-align:center;"></div>
+    </form>
+
+    <p class="auth-footer">
+      Trouble signing in? <a class="link" href="forgot-password.html">Verify or recover your account</a>
+    </p>
+    <p class="auth-footer">
+      New here? <a class="link" href="signup.html">Create an account</a>
+    </p>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
